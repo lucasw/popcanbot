@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="use_rviz" default="false"/>
+  <arg name="use_joy" default="false" doc="use joystick/gamepad"/>
+
+  <rosparam file="$(find popcanbot_gazebo_control)/config/popcanbot_gazebo_control.yaml" command="load"/>
+
+  <!-- load every controller in the yaml -->
+  <node name="spawner" pkg="controller_manager" type="spawner"
+    output="screen" ns="/popcanbot"
+    args="joint_state_controller
+       front_left/steer_position_controller
+       front_left/wheel_position_controller
+       front_right/steer_position_controller
+       front_right/wheel_position_controller
+       back_left/wheel_position_controller
+       back_right/wheel_position_controller"/>
+
+  <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">
+    <arg name="use_joy" value="$(arg use_joy)"/>
+  </include>
+
+</launch>

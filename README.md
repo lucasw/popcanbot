@@ -1,4 +1,4 @@
-# carbot
+# popcanbot
 
 ros robot with car-like steering
 
@@ -17,7 +17,7 @@ If using kinetic, get the kinetic branch:
 
 # gazebo simulation
 
-    roslaunch carbot_gazebo_control carbot_gazebo_control.launch
+    roslaunch popcanbot_gazebo_control popcanbot_gazebo_control.launch
 
 If it is the first time gazebo has launched, this may take a long time before you see
 
@@ -62,4 +62,4 @@ It's impossible to command a car/bicycle/ackerman vehicle to drive only sideways
 so it is a matter of convention to have to always command some linear.x and then angular.z or linear.y which may or may not be achieveable depending on the distance of the steering wheels to the fixed wheels, and the joint limits of the steering wheels.
 
 It appears that commanding linear.x in combination with angular.z is the preferred method (and linear.y results even if desired to be zero).
-carbot also has a mode where linear.x and linear.y are commanded and there is a resulting angular.z.
+popcanbot also has a mode where linear.x and linear.y are commanded and there is a resulting angular.z.
