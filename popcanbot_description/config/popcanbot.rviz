@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /TF1/Frames1
         - /RobotModel1
-        - /RobotModel1/Joints1
       Splitter Ratio: 0.652173996
     Tree Height: 558
   - Class: rviz/Selection
@@ -64,84 +63,104 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Alpha: 0.5
+    - Alpha: 0.699999988
       Class: rviz/RobotModel
       Collision Enabled: true
       Enabled: true
-      Joints:
+      Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: Joints in Alphabetic Order
-        back_axle_joint:
+        Link Tree Style: Links in Alphabetic Order
+        arm_horizontal:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        back_left_axle:
+        arm_vertical:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        back_right_axle:
+        arm_vertical_platform:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        base_steer_joint:
+        back_left:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
-        camera_joint:
-          Show Axes: false
+          Show Trail: false
           Value: true
-        camera_optical_joint:
+        back_right:
+          Alpha: 1
           Show Axes: false
-        chassis_joint:
-          Show Axes: false
+          Show Trail: false
           Value: true
-        front_axle_joint:
+        base_link:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
           Value: true
-        front_left_steer_joint:
+        camera_link_optical:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
+        camera_mast:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
           Value: true
-        front_right_steer_joint:
+        caster:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
           Value: true
-        lead_steer_joint:
+        caster_block:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
-        test_joint:
-          Show Axes: false
+          Show Trail: false
           Value: true
-        wheel_back_left_axle:
+        chassis_link:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
           Value: true
-        wheel_back_left_hubcap_joint:
+        gripper_left:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        wheel_back_right_axle:
+        gripper_right:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
           Value: true
-        wheel_back_right_hubcap_joint:
+        main_axle:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        wheel_front_left_axle:
+        wheel_back_left:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
           Value: true
-        wheel_front_left_hubcap_joint:
+        wheel_back_right:
+          Alpha: 1
           Show Axes: false
+          Show Trail: false
           Value: true
-        wheel_front_right_axle:
+        wheel_caster:
+          Alpha: 1
           Show Axes: false
-          Show Joint Axis: false
+          Show Trail: false
           Value: true
-        wheel_front_right_hubcap_joint:
-          Show Axes: false
-          Value: true
-        wheel_lead_axle:
-          Show Axes: false
-          Show Joint Axis: false
       Name: RobotModel
       Robot Description: /robot_description
       TF Prefix: ""
@@ -217,12 +236,12 @@ Visualization Manager:
       Unreliable: false
       Value: false
     - Class: rviz/Axes
-      Enabled: false
+      Enabled: true
       Length: 1
       Name: Axes
       Radius: 0.100000001
-      Reference Frame: wheel_back_right_hubcap
-      Value: false
+      Reference Frame: base_link
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -247,22 +266,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.01617289
+      Distance: 2.7044282
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.370979607
-        Y: -0.354086548
-        Z: -0.386208355
+        X: -0.0203603562
+        Y: -0.240403563
+        Z: -0.180800021
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.479796708
+      Pitch: 0.489796519
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.65539372
+      Yaw: 1.42539656
     Saved: ~
 Window Geometry:
   Camera:
@@ -284,5 +303,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 861
-  X: 594
+  X: 568
   Y: 24

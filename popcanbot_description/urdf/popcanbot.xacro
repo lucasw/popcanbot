@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <robot name="popcanbot" xmlns:xacro="http://wiki.ros.org/xacro">
 
-<xacro:property name="car_length" value="1.4"/>
-<xacro:property name="car_width" value="1.0"/>
-<xacro:property name="car_height" value="0.3"/>
-<xacro:property name="wheel_width" value="0.15"/>
-<xacro:property name="wheel_radius" value="0.2"/>
+<xacro:property name="car_length" value="0.609"/>
+<xacro:property name="car_width" value="0.5"/>
+<xacro:property name="car_height" value="0.05"/>
+<xacro:property name="wheel_width" value="0.025"/>
+<xacro:property name="wheel_radius" value="0.07"/>
+<xacro:property name="use_camera" value="false"/>
 <!-- TODO(lwalter) pass these in as args -->
 
 <xacro:include filename="$(find popcanbot_description)/urdf/popcanbot.gazebo"/>
@@ -13,10 +14,11 @@
 <!-- don't use macro names that are the same as other key names
   like 'box', 'cylinder', etc. otherwise get Invalid parameter "size"
 -->
-<xacro:macro name="block" params="name length width height mass r:=0.5 b:=0.5 g:=0.5">
+<xacro:macro name="block" params="name length width height mass
+    x:=0 y:=0 z:=0 r:=0.5 b:=0.5 g:=0.5">
   <link name="${name}">
      <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
       <geometry>
         <box size="${length} ${width} ${height}"/>
       </geometry>
@@ -25,13 +27,13 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
       <geometry>
         <box size="${length} ${width} ${height}"/>
       </geometry>
     </collision>
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
       <mass value="${mass}"/>
       <inertia
           ixx="${mass / 12.0 * (width * width + height * height)}" ixy="0.0" ixz="0.0"
@@ -104,7 +106,7 @@
 
 <!-- TODO(lucasw) make a wheel xacro to get common code out of
     fixed_wheel and steered_wheel -->
-<xacro:macro name="fixed_wheel" params="name parent y">
+<xacro:macro name="fixed_wheel" params="name parent y radius">
   <xacro:block name="${name}" length="${car_width/8.0}"
       width="${car_width/8.0}" height="${car_width/8.0}" mass="0.1"/>
   <joint name="${name}_axle" type="fixed">
@@ -114,12 +116,13 @@
   </joint>
 
   <xacro:generic_wheel name="${name}" parent="${name}"
-      radius="${wheel_radius}" width="${wheel_width}"/>
+      radius="${radius}" width="${wheel_width}"/>
  </xacro:macro>
 
   <link name="base_link"/>
   <xacro:block name="chassis_link" length="${car_length}"
-      width="${car_width}" height="${car_height}" mass="10.0"/>
+      width="${car_width}" height="${car_height}" mass="10.0"
+      r="0.8" g="0.7" b="0.1"/>
   <joint name="chassis_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis_link"/>
@@ -139,22 +142,86 @@
     <origin xyz="${-car_length/2 + 0.1} 0 -0.1" rpy="0 0 0"/>
   </joint>
   <xacro:fixed_wheel name="caster" parent="caster_block"
-      y="0"/>
+      y="0" radius="${wheel_radius * 0.5}"/>
 
   <xacro:block name="main_axle" length="${car_width/8.0}"
       width="${car_width}" height="${car_width/8.0}" mass="0.1"/>
   <joint name="main_axle_joint" type="fixed">
     <parent link="base_link"/>
     <child link="main_axle"/>
-    <origin xyz="${car_length/2 - 0.1} 0 0" rpy="0 0 0"/>
+    <origin xyz="${car_length/2 - 0.1} 0 ${-car_height/4}" rpy="0 0 0"/>
   </joint>
 
   <xacro:fixed_wheel name="back_left" parent="main_axle"
-      y="${car_width/2 + wheel_width/2 + 0.1}"/>
+      y="${car_width/2 + wheel_width/2 + 0.1}" radius="${wheel_radius}"/>
   <xacro:fixed_wheel name="back_right" parent="main_axle"
-      y="${-1 * (car_width/2 + wheel_width/2 + 0.1)}"/>
+      y="${-1 * (car_width/2 + wheel_width/2 + 0.1)}" radius="${wheel_radius}"/>
+
+  <!-- the arm -->
+  <xacro:block name="arm_vertical" length="0.05"
+      width="0.05" height="0.5" mass="1.0" z="0.25"/>
+  <joint name="arm_vertical_rotary_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="arm_vertical"/>
+    <origin xyz="0 0 ${car_height/4}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" upper="1.6" lower="-1.6" velocity="0.5"/>
+  </joint>
+
+  <transmission name="arm_vertical_rotary_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_vertical_rotary_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_vertical_rotary_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <xacro:block name="arm_vertical_platform" length="0.05"
+      width="0.1" height="0.05" mass="0.1"
+      r="0.8" g="0.8" b="0.8"/>
+  <joint name="arm_vertical_platform" type="prismatic">
+    <parent link="arm_vertical"/>
+    <child link="arm_vertical_platform"/>
+    <origin xyz="0.05 0 0.25" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="20.0" velocity="0.25" lower="-0.20" upper="0.20"/>
+  </joint>
+
+  <xacro:block name="arm_horizontal" length="0.5"
+      width="0.05" height="0.05" mass="0.2"/>
+  <joint name="arm_horizontal_platform" type="prismatic">
+    <parent link="arm_vertical_platform"/>
+    <child link="arm_horizontal"/>
+    <origin xyz="0.1 -0.06 -0.05" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="20.0" velocity="0.25" lower="-0.22" upper="0.05"/>
+  </joint>
+
+  <!-- gripper -->
+  <xacro:block name="gripper_left" length="0.07"
+      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"/>
+  <joint name="gripper_left_joint" type="revolute">
+    <parent link="arm_horizontal"/>
+    <child link="gripper_left"/>
+    <origin xyz="0.25 0.015 -0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" upper="0.4" lower="-0.1" velocity="0.5"/>
+  </joint>
+  <xacro:block name="gripper_right" length="0.07"
+      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"/>
+  <joint name="gripper_right_joint" type="revolute">
+    <parent link="arm_horizontal"/>
+    <child link="gripper_right"/>
+    <origin xyz="0.25 -0.015 -0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" upper="0.1" lower="-0.4" velocity="0.5"/>
+  </joint>
 
   <!-- sensors -->
+  <xacro:if value="${use_camera}">
   <xacro:block name="camera_mast" length="0.04"
       width="0.02" height="0.03" mass="0.1"/>
   <joint name="camera_mast_joint" type="prismatic">
@@ -183,5 +250,6 @@
     <parent link="camera_link"/>
     <child link="camera_link_optical"/>
   </joint>
+  </xacro:if>
 
 </robot>
