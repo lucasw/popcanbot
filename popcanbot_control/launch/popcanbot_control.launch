@@ -25,6 +25,7 @@
       name="teleop_twist_keyboard" unless="$(arg use_joy)">
   </node>
 
+  <!--
   <node pkg="popcanbot_control" type="cmd_vel_to_joint.py"
       name="cmd_vel_to_joint" output="screen">
   </node>
@@ -32,47 +33,23 @@
   <node pkg="popcanbot_control" type="acker.py"
       name="acker" output="screen">
   </node>
+  -->
 
   <!-- TODO(lucasw) instead of this, look at ros control boilerplate and make
       a controller that does the same thing -->
   <group ns="popcanbot" if="$(arg use_command_to_joint_state)">
     <group ns="front_right">
-    <node pkg="popcanbot_control" type="command_to_joint_state.py"
-        name="steer_command_to_joint_state" output="screen">
-      <param name="joint_name" value="front_right_steer_joint"/>
-      <remap from="command" to="steer_position_controller/command"/>
-    </node>
-    <node pkg="popcanbot_control" type="command_to_joint_state.py"
-        name="command_to_joint_state" output="screen">
-      <param name="joint_name" value="wheel_front_right_axle"/>
-      <remap from="command" to="wheel_position_controller/command"/>
-    </node>
+      <node pkg="popcanbot_control" type="command_to_joint_state.py"
+          name="command_to_joint_state" output="screen">
+        <param name="joint_name" value="wheel_front_right_joint"/>
+        <remap from="command" to="wheel_position_controller/command"/>
+      </node>
     </group>
 
     <group ns="front_left">
       <node pkg="popcanbot_control" type="command_to_joint_state.py"
-          name="steer_command_to_joint_state" output="screen">
-        <param name="joint_name" value="front_left_steer_joint"/>
-        <remap from="command" to="steer_position_controller/command"/>
-      </node>
-      <node pkg="popcanbot_control" type="command_to_joint_state.py"
           name="command_to_joint_state" output="screen">
-        <param name="joint_name" value="wheel_front_left_axle"/>
-        <remap from="command" to="wheel_position_controller/command"/>
-      </node>
-    </group>
-
-    <group ns="back_right">
-      <node pkg="popcanbot_control" type="command_to_joint_state.py"
-          name="command_to_joint_state" output="screen">
-        <param name="joint_name" value="wheel_back_left_axle"/>
-        <remap from="command" to="wheel_position_controller/command"/>
-      </node>
-    </group>
-    <group ns="back_left">
-      <node pkg="popcanbot_control" type="command_to_joint_state.py"
-          name="command_to_joint_state" output="screen">
-        <param name="joint_name" value="wheel_back_right_axle"/>
+        <param name="joint_name" value="wheel_front_left_joint"/>
         <remap from="command" to="wheel_position_controller/command"/>
       </node>
     </group>

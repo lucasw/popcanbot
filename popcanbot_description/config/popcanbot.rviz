@@ -63,7 +63,7 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Alpha: 0.699999988
+    - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: true
       Enabled: true
@@ -88,39 +88,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        back_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_link_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_mast:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         caster_block:
           Alpha: 1
           Show Axes: false
@@ -136,7 +107,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        gripper_left_tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         gripper_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_right_tip:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -146,17 +127,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_back_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_back_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         wheel_caster:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_right:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -236,12 +217,12 @@ Visualization Manager:
       Unreliable: false
       Value: false
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 1
       Name: Axes
       Radius: 0.100000001
       Reference Frame: base_link
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -266,22 +247,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.7044282
+      Distance: 1.59962368
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.0203603562
-        Y: -0.240403563
-        Z: -0.180800021
+        X: 0.0384811684
+        Y: -0.118868791
+        Z: 0.284694284
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.489796519
+      Pitch: 0.279796511
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.42539656
+      Yaw: 0.595390797
     Saved: ~
 Window Geometry:
   Camera:
@@ -303,5 +284,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 861
-  X: 568
-  Y: 24
+  X: 790
+  Y: 28
