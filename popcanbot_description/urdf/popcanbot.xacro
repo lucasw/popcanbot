@@ -178,23 +178,43 @@
   <xacro:block name="arm_vertical_platform" length="0.05"
       width="0.1" height="0.05" mass="0.1"
       r="0.8" g="0.8" b="0.8"/>
-  <joint name="arm_vertical_platform" type="prismatic">
+  <joint name="arm_vertical_platform_joint" type="prismatic">
     <parent link="arm_vertical"/>
     <child link="arm_vertical_platform"/>
     <origin xyz="0.05 0 0.25" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="20.0" velocity="0.25" lower="-0.14" upper="0.20"/>
   </joint>
+  <transmission name="arm_vertical_rotary_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_vertical_platform_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_vertical_platform_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
   <xacro:block name="arm_horizontal" length="0.5"
       width="0.05" height="0.05" mass="0.2"/>
-  <joint name="arm_horizontal_platform" type="prismatic">
+  <joint name="arm_horizontal_platform_joint" type="prismatic">
     <parent link="arm_vertical_platform"/>
     <child link="arm_horizontal"/>
     <origin xyz="0.1 -0.06 -0.05" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
     <limit effort="20.0" velocity="0.25" lower="-0.22" upper="0.05"/>
   </joint>
+  <transmission name="arm_vertical_rotary_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_horizontal_platform_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="arm_horizontal_platform_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
   <!-- gripper -->
   <xacro:block name="gripper_left" length="0.07"

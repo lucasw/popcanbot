@@ -11,7 +11,11 @@
     output="screen" ns="/popcanbot"
     args="joint_state_controller
        front_left/wheel_position_controller
-       front_right/wheel_position_controller"/>
+       front_right/wheel_position_controller
+       arm/arm_vertical_rotation_controller
+       arm/arm_vertical_position_controller
+       arm/arm_horizontal_position_controller
+       "/>
 
   <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">
     <arg name="use_joy" value="$(arg use_joy)"/>
