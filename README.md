@@ -1,6 +1,8 @@
 # popcanbot
 
-ros robot with car-like steering
+ros robot with two-wheels plus caster steering and a gripper on an arm for competing in the SRS popcan challenge:
+
+http://www.robothon.org/robothon/popcan.php
 
 # Dependencies
 
