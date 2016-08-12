@@ -32,4 +32,16 @@
       respawn="false" output="screen"
       args="-urdf -model popcanbot -param robot_description -x -1.0 -y -2.0 -z 0.5"/>
 
+  <!-- fridge -->
+  <include file="$(find popcanbot_description)/launch/fridge_description.launch">
+    <arg name="use_joint_gui" value="false"/>
+    <arg name="use_static_tf" value="false"/>
+    <arg name="use_rviz" value="false"/>
+  </include>
+
+  <node name="fridge_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+      args="-urdf -model fridge -param fridge/description -x -0.72 -y -0.0 -z 0.1 -Y -1.571"/>
+
+
 </launch>
