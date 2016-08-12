@@ -24,7 +24,7 @@
 
   <node if="$(arg use_static_tf)"
       pkg="tf" type="static_transform_publisher" name="static_transform_publisher"
-      args="-3.0 0 0.2 0 0 0 map fridge_base_link 30"/>
+      args="-3.0 0 0.025 0 0 0 map fridge_base_link 30"/>
 
   </group>
 

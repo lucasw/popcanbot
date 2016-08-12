@@ -6,6 +6,11 @@
 <xacro:property name="height" value="0.7"/>
 <xacro:property name="wall_thickness" value="0.05"/>
 
+<xacro:property name="handle_length" value="0.06"/>
+<xacro:property name="handle_width" value="0.03"/>
+<xacro:property name="handle_height" value="0.1"/>
+<xacro:property name="handle_thickness" value="0.025"/>
+
 <xacro:include filename="$(find popcanbot_description)/urdf/util.xacro"/>
 
   <link name="fridge_base_link"/>
@@ -73,6 +78,15 @@
     <origin xyz="${length/2} ${width/2} ${height/2}" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="2.5" lower="0" velocity="0.5"/>
+  </joint>
+
+  <xacro:block name="handle_front" length="${handle_thickness}"
+      width="${handle_width}" height="${handle_height}" mass="0.1"
+      r="1.0" g="1.0" b="1.0"/>
+  <joint name="handle_front_joint" type="fixed">
+    <parent link="fridge_door"/>
+    <child link="handle_front"/>
+    <origin xyz="${handle_length + wall_thickness/2} ${-width + handle_width/2} 0" rpy="0 0 0"/>
   </joint>
 
 </robot>
