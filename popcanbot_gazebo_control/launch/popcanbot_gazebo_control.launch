@@ -15,7 +15,8 @@
        arm/arm_vertical_rotation_controller
        arm/arm_vertical_position_controller
        arm/arm_horizontal_position_controller
-       arm/gripper_position_controller
+       arm/gripper_left_position_controller
+       arm/gripper_right_position_controller
        "/>
 
   <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">

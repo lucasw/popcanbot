@@ -166,6 +166,7 @@
     <origin xyz="0.25 -0.02 -0.05" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="0.1" lower="-0.4" velocity="0.5"/>
+    <!-- mimic doesn't do anything in gazebo, but should be useful in pure rviz -->
     <mimic joint="gripper_left_joint" multiplier="-1.0"/>
   </joint>
   <xacro:block name="gripper_right_mid" length="0.07"
@@ -183,6 +184,16 @@
     <origin xyz="0.05 0.0 0.0" rpy="0 0 0.3"/>
   </joint>
 
+  <transmission name="gripper_right_rotary_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_right_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_right_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
   <!-- sensors -->
   <xacro:if value="${use_camera}">
