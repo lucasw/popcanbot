@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot name="fridge" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:property name="length" value="0.5"/>
+<xacro:property name="width" value="0.6"/>
+<xacro:property name="height" value="0.7"/>
+<xacro:property name="wall_thickness" value="0.05"/>
+
+<xacro:include filename="$(find popcanbot_description)/urdf/util.xacro"/>
+
+  <link name="fridge_base_link"/>
+  <xacro:block name="fridge_bottom" length="${length}"
+      width="${width}" height="${wall_thickness}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="bottom_joint" type="fixed">
+    <parent link="fridge_base_link"/>
+    <child link="fridge_bottom"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_back" length="${wall_thickness}"
+      width="${width}" height="${height}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="back_joint" type="fixed">
+    <parent link="fridge_bottom"/>
+    <child link="fridge_back"/>
+    <origin xyz="${-length/2} 0 ${height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_left" length="${length}"
+      width="${wall_thickness}" height="${height}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="left_joint" type="fixed">
+    <parent link="fridge_bottom"/>
+    <child link="fridge_left"/>
+    <origin xyz="0 ${width/2} ${height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_right" length="${length}"
+      width="${wall_thickness}" height="${height}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="right_joint" type="fixed">
+    <parent link="fridge_bottom"/>
+    <child link="fridge_right"/>
+    <origin xyz="0 ${-width/2} ${height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_shelf" length="${length}"
+      width="${width}" height="${wall_thickness}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="shelf_joint" type="fixed">
+    <parent link="fridge_base_link"/>
+    <child link="fridge_shelf"/>
+    <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_top" length="${length}"
+      width="${width}" height="${wall_thickness}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"/>
+  <joint name="top_joint" type="fixed">
+    <parent link="fridge_base_link"/>
+    <child link="fridge_top"/>
+    <origin xyz="0 0 ${height}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:block name="fridge_door" length="${wall_thickness}"
+      width="${width}" height="${height}" mass="5.0"
+      r="0.7" g="0.7" b="0.7"
+      y="${-width/2}" x="${wall_thickness/2}"/>
+  <joint name="door_joint" type="revolute">
+    <parent link="fridge_bottom"/>
+    <child link="fridge_door"/>
+    <origin xyz="${length/2} ${width/2} ${height/2}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" upper="2.5" lower="0" velocity="0.5"/>
+  </joint>
+
+</robot>

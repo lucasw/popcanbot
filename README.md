@@ -4,6 +4,14 @@ ros robot with two-wheels plus caster steering and a gripper on an arm for compe
 
 http://www.robothon.org/robothon/popcan.php
 
+# Dimensions
+
+"The US standard can is 4.83 inches (0.1227 m) high, 2.13 inches in diameter at the lid, and 2.60 inches (0.0660 m) in diameter at the widest point of the body."
+
+https://en.wikipedia.org/wiki/Beverage_can
+
+The gazebo coke_can.dae measures 120 mm (?), maybe it isn't oversized.
+
 # Dependencies
 
 Currently in jade and kinetic it is necessary to
