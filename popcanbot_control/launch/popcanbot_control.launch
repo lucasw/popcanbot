@@ -2,8 +2,9 @@
 <launch>
   <arg name="use_joy" default="false" doc="use joystick input"/>
   <arg name="use_rviz" default="true"/>
-  <arg name="use_command_to_joint_state" default="true"
+  <arg name="use_command_to_joint_state" default="false"
       doc="if the gazebo simulation isn't running, and there is no encoder feedback being converted to joint states, generate joint states from their commands"/>
+
   <include file="$(find popcanbot_description)/launch/popcanbot_description.launch">
     <arg name="use_joint_gui" value="false"/>
     <arg name="use_static_tf" value="false"/>
@@ -25,18 +26,15 @@
       name="teleop_twist_keyboard" unless="$(arg use_joy)">
   </node>
 
-  <!--
+  <group ns="popcanbot">
   <node pkg="popcanbot_control" type="cmd_vel_to_joint.py"
       name="cmd_vel_to_joint" output="screen">
   </node>
-
-  <node pkg="popcanbot_control" type="acker.py"
-      name="acker" output="screen">
-  </node>
-  -->
+  </group>
 
   <!-- TODO(lucasw) instead of this, look at ros control boilerplate and make
       a controller that does the same thing -->
+  <!--
   <group ns="popcanbot" if="$(arg use_command_to_joint_state)">
     <group ns="front_right">
       <node pkg="popcanbot_control" type="command_to_joint_state.py"
@@ -54,4 +52,5 @@
       </node>
     </group>
   </group>
+  -->
 </launch>

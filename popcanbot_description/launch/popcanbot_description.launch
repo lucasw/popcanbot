@@ -13,8 +13,8 @@
     <param name="use_gui" value="$(arg use_joint_gui)"/>
     <rosparam param="source_list">
       ["popcanbot/joint_states",
-       "popcanbot/front_right/joint_states",
-       "popcanbot/front_left/joint_states"]
+       "popcanbot/front_right/joint_state",
+       "popcanbot/front_left/joint_state"]
     </rosparam>
       <!-- these are controlled by gazebo now, but TODO(lucasw) need a non-gazebo
         way to set them also- it could be this rosparam is set elsewhere,

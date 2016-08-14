@@ -21,7 +21,7 @@
   <joint name="chassis_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="${-car_length/2 + 0.05} 0 0" rpy="0 0 0"/>
   </joint>
 
   <!-- every link has to have inertia in order for it to work in gazebo
@@ -34,7 +34,7 @@
     <parent link="base_link"/>
     <child link="caster_block"/>
     <axis xyz="0 0 1"/>
-    <origin xyz="${-car_length/2 + 0.1} 0 ${-car_height/2}" rpy="0 0 0"/>
+    <origin xyz="${-car_length + 0.1} 0 ${-car_height/2}" rpy="0 0 0"/>
   </joint>
   <xacro:generic_wheel name="wheel_caster" parent="caster_block"
       width="${wheel_width}"
@@ -47,7 +47,7 @@
   <joint name="main_axle_joint" type="fixed">
     <parent link="base_link"/>
     <child link="main_axle"/>
-    <origin xyz="${car_length/2 - 0.1} 0 ${-(car_height/2 + clearance - wheel_radius)}"
+    <origin xyz="0 0 ${-(car_height/2 + clearance - wheel_radius)}"
         rpy="0 0 0"/>
   </joint>
 
@@ -65,7 +65,7 @@
   <joint name="arm_vertical_rotary_joint" type="revolute">
     <parent link="base_link"/>
     <child link="arm_vertical"/>
-    <origin xyz="0 0 ${car_height/4}" rpy="0 0 0"/>
+    <origin xyz="${-car_length/3} 0 ${car_height/4}" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="1.6" lower="-1.6" velocity="0.5"/>
   </joint>
