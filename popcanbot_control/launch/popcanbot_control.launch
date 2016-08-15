@@ -9,24 +9,24 @@
     <arg name="use_rviz" value="$(arg use_rviz)"/>
   </include>
 
+  <group ns="popcanbot">
   <group if="$(arg use_joy)">
   <node pkg="joy" type="joy_node"
       name="joy">
     <param name="dev" value="/dev/input/js0"/>
   </node>
-
   <node pkg="teleop_twist_joy" type="teleop_node"
       name="teleop_twist_joy">
     <rosparam command="load" file="$(find popcanbot_control)/config/xbox.config.yaml"/>
   </node>
   </group>
+
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
       name="teleop_twist_keyboard" unless="$(arg use_joy)">
   </node>
 
-  <group ns="popcanbot">
   <node pkg="popcanbot_control" type="cmd_vel_to_joint.py"
       name="cmd_vel_to_joint" output="screen">
   </node>
-  </group>
+  </group>  <!-- popcanbot -->
 </launch>

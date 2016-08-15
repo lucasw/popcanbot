@@ -6,7 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
-        - /RobotModel1
+        - /Popcanbot1
         - /Sonar1
       Splitter Ratio: 0.652173996
     Tree Height: 558
@@ -172,8 +172,8 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-      Name: RobotModel
-      Robot Description: /robot_description
+      Name: Popcanbot
+      Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0.0500000007
       Value: true
@@ -224,12 +224,12 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
-        "": true
         Axes: true
         Grid: true
         Image: true
         PointStamped: true
-        RobotModel: true
+        Popcanbot: true
+        Sonar: true
         Steer: true
         TF: true
         Value: true
@@ -261,7 +261,7 @@ Visualization Manager:
       Enabled: true
       Name: Sonar
       Queue Size: 100
-      Topic: /sonar
+      Topic: /popcanbot/sonar
       Unreliable: false
       Value: true
   Enabled: true
@@ -288,7 +288,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.42057085
+      Distance: 2.45272732
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -300,10 +300,10 @@ Visualization Manager:
         Z: 0.151475459
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.129796296
+      Pitch: 0.394796342
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.45539129
+      Yaw: 2.63539147
     Saved: ~
 Window Geometry:
   Camera:
@@ -325,5 +325,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 861
-  X: 1018
+  X: 1014
   Y: 24

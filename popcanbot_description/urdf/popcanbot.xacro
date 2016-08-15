@@ -39,7 +39,9 @@
   <xacro:generic_wheel name="wheel_caster" parent="caster_block"
       width="${wheel_width}"
       radius="${caster_wheel_radius}" mass="0.1" use_tran="false"
-      z="${-(clearance - caster_wheel_radius)}"/>
+      x="0.02"
+      z="${-(clearance - caster_wheel_radius)}"
+      mu1="20" mu2="10"/>
 
   <xacro:block name="main_axle" length="${car_width/8.0}"
       width="${car_width + 0.05}" height="${car_width/8.0}" mass="0.1"
@@ -128,7 +130,7 @@
   <joint name="gripper_left_joint" type="revolute">
     <parent link="arm_horizontal"/>
     <child link="gripper_left"/>
-    <origin xyz="0.25 0.02 -0.05" rpy="0 0 0"/>
+    <origin xyz="0.25 0.02 -0.1" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="0.7" lower="-0.1" velocity="0.5"/>
   </joint>
@@ -163,7 +165,7 @@
   <joint name="gripper_right_joint" type="revolute">
     <parent link="arm_horizontal"/>
     <child link="gripper_right"/>
-    <origin xyz="0.25 -0.02 -0.05" rpy="0 0 0"/>
+    <origin xyz="0.25 -0.02 -0.1" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="0.1" lower="-0.4" velocity="0.5"/>
     <!-- mimic doesn't do anything in gazebo, but should be useful in pure rviz -->

@@ -64,13 +64,15 @@
 </xacro:macro>
 
 <xacro:macro name="generic_wheel" params="name parent radius width
-    z:=0 y:=0 y_axis:=1 mass:=0.2 use_tran:=true">
+    x:=0 y:=0 z:=0
+    y_axis:=1 mass:=0.2 use_tran:=true
+    mu1:=200 mu2:=100">
 
   <xacro:wheel name="${name}" width="${width}" radius="${radius}" mass="${mass}"/>
   <joint name="${name}_joint" type="continuous">
     <parent link="${parent}"/>
     <child link="${name}"/>
-    <origin xyz="0 ${y} ${z}" rpy="0 0 0"/>
+    <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
     <axis xyz="0 ${y_axis} 0"/>
     <limit effort="100.0" velocity="0.5"/>
   </joint>
@@ -88,9 +90,9 @@
   </transmission>
   </xacro:if>
 
-  <gazebo reference="wheel_${name}">
-    <mu1>800</mu1>
-    <mu2>100</mu2>
+  <gazebo reference="${name}">
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
     <kp value="10000000.0"/>
     <kd value="1.0"/>
   </gazebo>

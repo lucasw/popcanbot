@@ -5,7 +5,10 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/popcanbot</robotNamespace>
-      <robotParam>/robot_description</robotParam>
+      <!-- TODO(lucasw) this is still broken, maybe need to pull
+          latest gazebo_ros_pkgs https://github.com/ros-simulation/gazebo_ros_pkgs/issues/112 -->
+      <!--robotParam>/popcanbot/robot_description</robotParam-->
+      <robotParam>robot_description</robotParam>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
@@ -83,7 +86,7 @@
 				<alwaysOn>true</alwaysOn>
         <!-- TODO(lucasw) does this update rate do anything (the camera one does not)? -->
 				<updateRate>5</updateRate>
-				<topicName>sonar</topicName>
+				<topicName>/popcanbot/sonar</topicName>
 				<frameName>sonar_link</frameName>
 				<fov>0.5</fov>
 				<radiation>ultrasound</radiation>

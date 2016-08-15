@@ -6,13 +6,16 @@
   <arg name="use_robot_pub" default="true"/>
 
   <group ns="fridge">
-  <param name="description"
+  <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/fridge.xacro'"/>
 
+  <!-- TODO(lucasw) running two of these even in different namespaces was causing crashes -->
+  <!--
   <node name="joint_state_publisher" pkg="joint_state_publisher"
       type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_joint_gui)"/>
   </node>
+  -->
 
   <node name="robot_state_publisher" pkg="robot_state_publisher"
       type="robot_state_publisher"

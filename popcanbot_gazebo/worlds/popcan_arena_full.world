@@ -725,7 +725,7 @@
       </model>
       <model name='coke_can'>
         <pose frame=''>-0.745823 0.035832 0.515862 -0.042211 0.015161 0.857027</pose>
-        <scale>0.35 0.35 0.35</scale>
+        <scale>0.5 0.5 0.5</scale>
         <link name='link'>
           <pose frame=''>-0.745823 0.035832 0.515862 -0.042211 0.015161 0.857027</pose>
           <velocity>0 0 0 0 -0 0</velocity>

@@ -19,7 +19,8 @@
        arm/arm_horizontal_position_controller
        arm/gripper_left_position_controller
        arm/gripper_right_position_controller
-       "/>
+       ">
+  </node>
 
   <group ns="popcanbot">
     <group ns="front_right">
