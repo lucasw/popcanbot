@@ -227,4 +227,12 @@
   </joint>
   </xacro:if>
 
+  <xacro:block name="sonar_link" length="0.015"
+      width="0.05" height="0.02" mass="0.1"/>
+  <joint name="sonar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sonar_link"/>
+    <origin xyz="0.05 0 0.05" rpy="0 -0.1 0"/>
+  </joint>
+
 </robot>

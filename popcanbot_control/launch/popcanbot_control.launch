@@ -31,26 +31,4 @@
       name="cmd_vel_to_joint" output="screen">
   </node>
   </group>
-
-  <!-- TODO(lucasw) instead of this, look at ros control boilerplate and make
-      a controller that does the same thing -->
-  <!--
-  <group ns="popcanbot" if="$(arg use_command_to_joint_state)">
-    <group ns="front_right">
-      <node pkg="popcanbot_control" type="command_to_joint_state.py"
-          name="command_to_joint_state" output="screen">
-        <param name="joint_name" value="wheel_front_right_joint"/>
-        <remap from="command" to="wheel_position_controller/command"/>
-      </node>
-    </group>
-
-    <group ns="front_left">
-      <node pkg="popcanbot_control" type="command_to_joint_state.py"
-          name="command_to_joint_state" output="screen">
-        <param name="joint_name" value="wheel_front_left_joint"/>
-        <remap from="command" to="wheel_position_controller/command"/>
-      </node>
-    </group>
-  </group>
-  -->
 </launch>

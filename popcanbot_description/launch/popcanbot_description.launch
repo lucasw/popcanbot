@@ -11,6 +11,7 @@
   <node name="joint_state_publisher" pkg="joint_state_publisher"
       type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_joint_gui)"/>
+    <!-- the last two are commanded joint states, not encoder derived -->
     <rosparam param="source_list">
       ["popcanbot/joint_states",
        "popcanbot/front_right/joint_state",

@@ -6,6 +6,8 @@
   <rosparam file="$(find popcanbot_gazebo_control)/config/popcanbot_gazebo_control.yaml"
       command="load"/>
 
+	<!--TODO(lucasw) may want to make gazebo ros boilerplate variant rather than
+			using off the shelf controllers -->
   <!-- load every controller in the yaml -->
   <node name="spawner" pkg="controller_manager" type="spawner"
     output="screen" ns="/popcanbot"
@@ -18,6 +20,24 @@
        arm/gripper_left_position_controller
        arm/gripper_right_position_controller
        "/>
+
+  <group ns="popcanbot">
+    <group ns="front_right">
+      <node pkg="popcanbot_gazebo_control" type="joint_state_to_command.py"
+          name="joint_state_to_command" output="screen">
+        <param name="joint_name" value="wheel_front_right_joint"/>
+        <remap from="command" to="wheel_position_controller/command"/>
+      </node>
+    </group>
+
+    <group ns="front_left">
+      <node pkg="popcanbot_gazebo_control" type="joint_state_to_command.py"
+          name="joint_state_to_command" output="screen">
+        <param name="joint_name" value="wheel_front_left_joint"/>
+        <remap from="command" to="wheel_position_controller/command"/>
+      </node>
+    </group>
+  </group>
 
   <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">
     <arg name="use_joy" value="$(arg use_joy)"/>

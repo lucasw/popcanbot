@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /TF1/Frames1
         - /RobotModel1
+        - /Sonar1
       Splitter Ratio: 0.652173996
     Tree Height: 558
   - Class: rviz/Selection
@@ -92,6 +93,20 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_mast:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         caster_block:
           Alpha: 1
           Show Axes: false
@@ -107,6 +122,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        gripper_left_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         gripper_left_tip:
           Alpha: 1
           Show Axes: false
@@ -117,12 +137,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        gripper_right_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         gripper_right_tip:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         main_axle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sonar_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -194,6 +224,7 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
+        "": true
         Axes: true
         Grid: true
         Image: true
@@ -223,6 +254,16 @@ Visualization Manager:
       Radius: 0.100000001
       Reference Frame: base_link
       Value: false
+    - Alpha: 0.5
+      Buffer Length: 1
+      Class: rviz/Range
+      Color: 100; 100; 255
+      Enabled: true
+      Name: Sonar
+      Queue Size: 100
+      Topic: /sonar
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -247,22 +288,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.59962368
+      Distance: 4.42057085
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0384811684
-        Y: -0.118868791
-        Z: 0.284694284
+        X: 0.490150452
+        Y: -0.0127532249
+        Z: 0.151475459
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.279796511
+      Pitch: 0.129796296
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.595390797
+      Yaw: 1.45539129
     Saved: ~
 Window Geometry:
   Camera:
@@ -284,5 +325,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 861
-  X: 790
-  Y: 28
+  X: 1018
+  Y: 24
