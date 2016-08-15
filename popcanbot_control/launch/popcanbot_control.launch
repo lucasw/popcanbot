@@ -2,8 +2,6 @@
 <launch>
   <arg name="use_joy" default="false" doc="use joystick input"/>
   <arg name="use_rviz" default="true"/>
-  <arg name="use_command_to_joint_state" default="false"
-      doc="if the gazebo simulation isn't running, and there is no encoder feedback being converted to joint states, generate joint states from their commands"/>
 
   <include file="$(find popcanbot_description)/launch/popcanbot_description.launch">
     <arg name="use_joint_gui" value="false"/>
