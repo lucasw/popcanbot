@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="popcan" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:property name="radius" value="0.027051"/>
+<xacro:property name="height" value="0.122682"/>
+
+<xacro:include filename="$(find popcanbot_description)/urdf/util.xacro"/>
+
+  <link name="popcan_base_link"/>
+  <xacro:generic_wheel name="popcan"
+      radius="${radius}" width="${height}" mass="0.37"
+      r="1.0" g="0.1" b="0.1"/>
+  <joint name="bottom_joint" type="fixed">
+    <parent link="popcan_base_link"/>
+    <child link="popcan"/>
+    <origin xyz="0 0 0" rpy="0 ${pi/2.0} 0"/>
+  </joint>
+
+</robot>
