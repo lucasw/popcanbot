@@ -25,8 +25,11 @@
       name="teleop_twist_keyboard" unless="$(arg use_joy)">
   </node>
 
+  <!-- try out diff drive controller, but this is still needed for real robot -->
   <node pkg="popcanbot_control" type="cmd_vel_to_joint.py"
-      name="cmd_vel_to_joint" output="screen">
+      name="cmd_vel_to_joint" output="screen"
+      if="false">
+    <!-- TODO(lucasw) pass in wheel radius and spacing -->
   </node>
   </group>  <!-- popcanbot -->
 </launch>

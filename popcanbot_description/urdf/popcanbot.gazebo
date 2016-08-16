@@ -11,7 +11,21 @@
       <robotParam>robot_description</robotParam>
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
-  </gazebo>
+
+		<plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+			<alwaysOn>true</alwaysOn>
+			<updateRate>10</updateRate>
+			<leftJoint>wheel_front_left_joint</leftJoint>
+			<rightJoint>wheel_front_right_joint</rightJoint>
+			<wheelSeparation>${wheel_separation}</wheelSeparation>
+			<wheelDiameter>${wheel_radius * 2}</wheelDiameter>
+			<torque>20</torque>
+			<commandTopic>/popcanbot/cmd_vel</commandTopic>
+			<odometryTopic>/popcanbot/odom</odometryTopic>
+			<odometryFrame>odom</odometryFrame>
+			<robotBaseFrame>base_link</robotBaseFrame>
+		</plugin>
+	</gazebo>
 
   <gazebo reference="camera_link">
     <sensor type="camera" name="camera1">

@@ -5,6 +5,7 @@
 <xacro:property name="car_width" value="0.5"/>
 <xacro:property name="car_height" value="0.05"/>
 <xacro:property name="clearance" value="0.10"/>
+<xacro:property name="wheel_separation" value="0.56"/>
 <xacro:property name="wheel_width" value="0.025"/>
 <xacro:property name="wheel_radius" value="0.07"/>
 <xacro:property name="caster_wheel_radius" value="0.04"/>
@@ -54,12 +55,13 @@
   </joint>
 
   <xacro:generic_wheel name="wheel_front_left" parent="main_axle"
-      y="${car_width/2 + wheel_width/2 + 0.02}"
-      width="${wheel_width}" radius="${wheel_radius}"/>
-  <xacro:generic_wheel name="wheel_front_right" parent="main_axle"
-      y="${-1 * (car_width/2 + wheel_width/2 + 0.02)}"
+      y="${wheel_separation/2}"
       width="${wheel_width}" radius="${wheel_radius}"
-      y_axis="1"/>
+      use_tran="false"/>
+  <xacro:generic_wheel name="wheel_front_right" parent="main_axle"
+      y="${-wheel_separation/2}"
+      width="${wheel_width}" radius="${wheel_radius}"
+      y_axis="1" use_tran="false"/>
 
   <!-- the arm -->
   <xacro:block name="arm_vertical" length="0.05"

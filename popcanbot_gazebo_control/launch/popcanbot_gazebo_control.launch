@@ -9,11 +9,14 @@
 	<!--TODO(lucasw) may want to make gazebo ros boilerplate variant rather than
 			using off the shelf controllers -->
   <!-- load every controller in the yaml -->
+  <!--
+    use diff drive controller
+       front_left/wheel_position_controller
+       front_right/wheel_position_controller
+  -->
   <node name="spawner" pkg="controller_manager" type="spawner"
     output="screen" ns="/popcanbot"
     args="joint_state_controller
-       front_left/wheel_position_controller
-       front_right/wheel_position_controller
        arm/arm_vertical_rotation_controller
        arm/arm_vertical_position_controller
        arm/arm_horizontal_position_controller
