@@ -5,17 +5,28 @@
   <arg name="use_static_tf" default="true"/>
   <arg name="use_robot_pub" default="true"/>
 
+  <group ns="popcan">
+    <param name="robot_description"
+      command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/popcan.xacro'"/>
+
+    <node if="$(arg use_static_tf)"
+        pkg="tf" type="static_transform_publisher" name="static_transform_publisher"
+        args="-3.0 0 0.47 0 0 0 map popcan_base_link 30"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher"
+        if="$(arg use_robot_pub)"/>
+  </group>
+
   <group ns="fridge">
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/fridge.xacro'"/>
 
   <!-- TODO(lucasw) running two of these even in different namespaces was causing crashes -->
-  <!--
   <node name="joint_state_publisher" pkg="joint_state_publisher"
       type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_joint_gui)"/>
   </node>
-  -->
 
   <node name="robot_state_publisher" pkg="robot_state_publisher"
       type="robot_state_publisher"

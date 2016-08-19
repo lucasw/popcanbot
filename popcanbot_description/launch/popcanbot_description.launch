@@ -2,8 +2,10 @@
 <launch>
   <arg name="use_rviz" default="false"/>
   <arg name="use_joint_gui" default="true"/>
+  <arg name="use_fridge_joint_pub" default="true"/>
   <arg name="use_static_tf" default="true"/>
   <arg name="use_robot_pub" default="true"/>
+  <arg name="use_fridge" default="true"/>
 
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/popcanbot.xacro'"/>
@@ -11,9 +13,8 @@
       type="robot_state_publisher"
       if="$(arg use_robot_pub)"/>
 
-  <group ns="popcanbot">
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher"
+  <node name="popcan_joint_state_publisher" pkg="joint_state_publisher"
       type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_joint_gui)"/>
     <!-- the last two are commanded joint states, not encoder derived -->
@@ -27,6 +28,7 @@
         or has an if=arg in it. -->
       <!-- "steered_joint_states"] -->
   </node>
+  <group ns="popcanbot">
 
   <node if="$(arg use_static_tf)"
       pkg="tf" type="static_transform_publisher" name="static_transform_publisher"
@@ -38,7 +40,8 @@
       args="-d $(find popcanbot_description)/config/popcanbot.rviz"/>
 
   <!-- fridge -->
-  <include file="$(find popcanbot_description)/launch/fridge_description.launch">
+  <include file="$(find popcanbot_description)/launch/fridge_description.launch"
+      if="$(arg use_fridge)">
     <arg name="use_joint_gui" value="$(arg use_joint_gui)"/>
     <arg name="use_static_tf" value="$(arg use_static_tf)"/>
     <arg name="use_rviz" value="false"/>

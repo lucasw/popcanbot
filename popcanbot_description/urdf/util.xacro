@@ -5,7 +5,8 @@
   like 'box', 'cylinder', etc. otherwise get Invalid parameter "size"
 -->
 <xacro:macro name="block" params="name length width height mass
-    x:=0 y:=0 z:=0 r:=0.5 b:=0.5 g:=0.5">
+    x:=0 y:=0 z:=0
+    r:=0.5 b:=0.5 g:=0.5">
   <link name="${name}">
      <visual>
       <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
@@ -35,7 +36,8 @@
 
 <!-- a wheel that rotates around the y axis, rolls forward toward the x axis -->
 <!--origin xyz="${length/2} ${width/2} ${height/2}" /-->
-<xacro:macro name="wheel" params="name width radius mass">
+<xacro:macro name="wheel" params="name width radius mass
+    r:=0.5 b:=0.5 g:=0.5">
   <link name="${name}">
     <visual>
       <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
@@ -43,7 +45,7 @@
         <cylinder length="${width}" radius="${radius}"/>
       </geometry>
       <material name="${name}_black">
-        <color rgba="0.2 0.2 0.2 1"/>
+        <color rgba="${r} ${g} ${b} 1"/>
       </material>
     </visual>
     <collision>
@@ -61,14 +63,19 @@
           izz="${mass / 2.0 * (radius * radius)}"/>
     </inertial>
   </link>
+  <gazebo reference="${name}">
+    <color rgba="${r} ${g} ${b} 1.0"/>
+  </gazebo>
 </xacro:macro>
 
 <xacro:macro name="generic_wheel" params="name parent radius width
     x:=0 y:=0 z:=0
+    r:=0.6 g:=0.6 b:=0.6
     y_axis:=1 mass:=0.2 use_tran:=true
     mu1:=200 mu2:=100">
 
-  <xacro:wheel name="${name}" width="${width}" radius="${radius}" mass="${mass}"/>
+  <xacro:wheel name="${name}" width="${width}" radius="${radius}" mass="${mass}"
+      r="1.0" g="1.0" b="1.0"/>
   <joint name="${name}_joint" type="continuous">
     <parent link="${parent}"/>
     <child link="${name}"/>

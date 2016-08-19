@@ -36,4 +36,7 @@
       respawn="false" output="screen"
       args="-urdf -model fridge -param fridge/robot_description -x -0.72 -y -0.0 -z 0.1 -Y -1.571"/>
 
+  <node name="popcan_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+      args="-urdf -model popcan -param popcan/robot_description -x -0.72 -y -0.0 -z 0.56 -Y -1.571"/>
 </launch>
