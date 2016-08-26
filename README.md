@@ -49,7 +49,7 @@ Any generator of cmd_vel messages can work here, though teleop twist keyboard an
 
 Stop the car:
 
-    rostopic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.0, y0.0}, angular: {z: 0.0}}" -1
+    rostopic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.0, y: 0.0}, angular: {z: 0.0}}" -1
 
 Drive straight forward:
 
@@ -68,8 +68,7 @@ Trying to go to fast glitches the gazebo simulation- it's possible toroidal/caps
 
 # linear.y vs. angular.z
 
-It's impossible to command a car/bicycle/ackerman vehicle to drive only sideways (linear.y) or rotate in place (angular.z) without also driving forward or backward (linear.x),
+It's impossible to command a car/bicycle/ackerman vehicle to drive only sideways (linear.y) without also driving forward or backward (linear.x) and combining rotation (angular.z),
 so it is a matter of convention to have to always command some linear.x and then angular.z or linear.y which may or may not be achieveable depending on the distance of the steering wheels to the fixed wheels, and the joint limits of the steering wheels.
 
 It appears that commanding linear.x in combination with angular.z is the preferred method (and linear.y results even if desired to be zero).
-popcanbot also has a mode where linear.x and linear.y are commanded and there is a resulting angular.z.
