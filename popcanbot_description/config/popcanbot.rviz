@@ -8,7 +8,7 @@ Panels:
         - /TF1/Frames1
         - /Fridge1
       Splitter Ratio: 0.652173996
-    Tree Height: 697
+    Tree Height: 319
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -27,7 +27,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: Image
 Visualization Manager:
   Class: ""
   Displays:
@@ -73,46 +73,100 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        fridge_back:
+        arm_horizontal:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        fridge_bottom:
+        arm_vertical:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_door:
+        arm_vertical_platform:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_left:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_right:
+        camera_link_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_mast:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_shelf:
+        caster_block:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fridge_top:
+        chassis_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        handle_front:
+        gripper_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_left_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_left_tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_right_mid:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_right_tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        main_axle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sonar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_caster:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_right:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -255,11 +309,12 @@ Visualization Manager:
       Value: false
       Visibility:
         Axes: true
+        Fridge: true
         Grid: true
         Image: true
         PointStamped: true
+        Popcan: true
         Popcanbot: true
-        RobotModel: true
         Sonar: true
         Steer: true
         TF: true
@@ -267,7 +322,7 @@ Visualization Manager:
         Wheel Trajectories: true
       Zoom Factor: 1
     - Class: rviz/Image
-      Enabled: false
+      Enabled: true
       Image Topic: /popcanbot/camera1/image_raw
       Max Value: 1
       Median window: 5
@@ -277,7 +332,7 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
-      Value: false
+      Value: true
     - Class: rviz/Axes
       Enabled: false
       Length: 1
@@ -331,10 +386,10 @@ Visualization Manager:
         Z: 0.391907275
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.254796296
+      Pitch: 0.254796237
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.8335743
+      Yaw: 2.44038963
     Saved: ~
 Window Geometry:
   Camera:
@@ -346,7 +401,7 @@ Window Geometry:
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001db00000348fc020000000bfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000004100000348000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d0065007200610000000241000000bd0000001600fffffffb0000000c00430061006d006500720061000000022f000000bc0000000000000000fb0000000a0049006d0061006700650000000241000000bd0000001600ffffff000000010000010f000002bdfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000041000002bd000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005780000003efc0100000002fb0000000800540069006d00650100000000000005780000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000003970000034800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001db00000348fc020000000bfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000041000001ce000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d0065007200610000000241000000bd0000001600fffffffb0000000c00430061006d006500720061000000022f000000bc0000000000000000fb0000000a0049006d0061006700650100000215000001740000001600ffffff000000010000010f000002bdfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000041000002bd000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000003840000003efc0100000002fb0000000800540069006d00650100000000000003840000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000001a30000034800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -355,6 +410,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1400
-  X: 305
+  Width: 900
+  X: 804
   Y: 24

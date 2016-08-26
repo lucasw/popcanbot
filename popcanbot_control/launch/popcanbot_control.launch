@@ -19,11 +19,16 @@
       name="teleop_twist_joy">
     <rosparam command="load" file="$(find popcanbot_control)/config/xbox.config.yaml"/>
   </node>
-  </group>
-
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
       name="teleop_twist_keyboard" unless="$(arg use_joy)">
+    <param name="speed" value="0.05"/>
+    <param name="turn" value="0.1"/>
   </node>
+
+  <node name="odom_static_transform_publisher"
+      pkg="tf" type="static_transform_publisher"
+      args="0 0 0 0 0 0 map odom 100"/>
+  </group>
 
   <!-- try out diff drive controller, but this is still needed for real robot -->
   <node pkg="popcanbot_control" type="cmd_vel_to_joint.py"

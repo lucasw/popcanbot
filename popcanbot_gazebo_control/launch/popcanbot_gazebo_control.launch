@@ -41,10 +41,26 @@
         <remap from="command" to="wheel_position_controller/command"/>
       </node>
     </group>
+
+		<!-- need to launch this in standalone terminal -->
+    <!--
+		<node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+				name="teleop_twist_keyboard" unless="$(arg use_joy)"
+				if="false">
+			<param name="speed" value="0.05"/>
+			<param name="turn" value="0.1"/>
+		</node>
+    -->
+
+    <node name="odom_static_transform_publisher"
+        pkg="tf" type="static_transform_publisher"
+        args="0 0 0 0 0 0 map odom 100"/>
+
   </group>
 
   <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">
     <arg name="use_joy" value="$(arg use_joy)"/>
   </include>
+
 
 </launch>
