@@ -2,8 +2,12 @@
 <launch>
   <arg name="use_joy" default="false" doc="use joystick/gamepad"/>
   <arg name="use_rviz" default="true"/>
+  <arg name="world_name" default="$(find popcanbot_gazebo)/worlds/popcan_arena_full.world"
+      doc="the world doesn't work with jade and earlier, so set this to worlds/empty.world if using those" />
+
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"
+      doc="setting this to false (so it runs immediately) may result in the popcan spawning before the fridge, and being ejected from it" />
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
@@ -12,7 +16,7 @@
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <!--arg name="world_name" value="$(find popcanbot_gazebo)/worlds/popcanbot.world"/-->
-    <arg name="world_name" value="$(find popcanbot_gazebo)/worlds/popcan_arena_full.world"/>
+    <arg name="world_name" value="$(arg world_name)"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -29,14 +33,14 @@
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
-      args="-urdf -model popcanbot -param robot_description -x -1.0 -y -2.0 -z 0.5"/>
+      args="-urdf -model popcanbot -param robot_description -x -1.0 -y -2.0 -z 0.13"/>
       <!-- args="-urdf -model popcanbot -param popcanbot/robot_description -x -1.0 -y -2.0 -z 0.5"/-->
 
   <node name="fridge_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
-      args="-urdf -model fridge -param fridge/robot_description -x -0.72 -y -0.0 -z 0.1 -Y -1.571"/>
+      args="-urdf -model fridge -param fridge/robot_description -x -0.72 -y -0.0 -z 0.03 -Y -1.571"/>
 
   <node name="popcan_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
-      args="-urdf -model popcan -param popcan/robot_description -x -0.72 -y -0.0 -z 0.56 -Y -1.571"/>
+      args="-urdf -model popcan -param popcan/robot_description -x -0.79 -y -0.096 -z 0.47 -Y -1.5708"/>
 </launch>

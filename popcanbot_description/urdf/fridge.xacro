@@ -75,9 +75,11 @@
   <joint name="door_joint" type="revolute">
     <parent link="fridge_bottom"/>
     <child link="fridge_door"/>
-    <origin xyz="${length/2} ${width/2} ${height/2}" rpy="0 0 0"/>
+    <!-- tilt the door very slightly so it doesn't fall open  -->
+    <origin xyz="${length/2} ${width/2} ${height/2}" rpy="0 -0.001 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="100.0" upper="2.5" lower="0" velocity="0.5"/>
+    <limit effort="10.0" upper="2.5" lower="0" velocity="0.1"/>
   </joint>
 
   <xacro:block name="handle_front" length="${handle_thickness}"

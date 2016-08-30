@@ -64,7 +64,8 @@
     </inertial>
   </link>
   <gazebo reference="${name}">
-    <color rgba="${r} ${g} ${b} 1.0"/>
+    <!-- this doesn't work, how to specify rgb color for gazebo? -->
+    <!--color rgba="${r} ${g} ${b} 1.0"/-->
   </gazebo>
 </xacro:macro>
 
