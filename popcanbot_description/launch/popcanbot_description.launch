@@ -7,8 +7,18 @@
   <arg name="use_robot_pub" default="true"/>
   <arg name="use_fridge" default="true"/>
 
+  <arg name="gripper_right_lower_lim" default="-0.5"/>
+  <arg name="gripper_right_upper_lim" default="0.0"/>
+  <arg name="gripper_left_lower_lim" default="-0.5"/>
+  <arg name="gripper_left_upper_lim" default="0.0"/>
+
   <param name="robot_description"
-    command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/popcanbot.xacro'"/>
+    command="$(find xacro)/xacro --inorder '$(find popcanbot_description)/urdf/popcanbot.xacro'
+        gripper_right_lower_lim:=$(arg gripper_right_lower_lim)
+        gripper_right_lower_lim:=$(arg gripper_right_lower_lim)
+        gripper_left_upper_lim:=$(arg gripper_left_upper_lim)
+        gripper_left_upper_lim:=$(arg gripper_left_upper_lim)
+        "/>
   <node name="robot_state_publisher" pkg="robot_state_publisher"
       type="robot_state_publisher"
       if="$(arg use_robot_pub)"/>
@@ -29,6 +39,47 @@
       <!-- "steered_joint_states"] -->
   </node>
   <group ns="popcanbot">
+
+    <group ns="controls">
+      <rosparam subst_value="true">
+        controls:
+          arm_horizontal:
+            name: arm_horizontal
+            topic: /popcanbot/arm/arm_horizontal_position_controller/command
+            type: double
+            min: -0.3
+            default: 0.0
+            max: 0.1
+          arm_vertical:
+            name: arm_vertical
+            topic: /popcanbot/arm/arm_vertical_position_controller/command
+            type: double
+            min: -0.2
+            default: 0.0
+            max: 0.4
+          arm_rotation:
+            name: arm_rotation
+            topic: /popcanbot/arm/arm_vertical_rotation_controller/command
+            type: double
+            min: -1.7
+            default: 0.0
+            max: 1.7
+          gripper_left:
+            name: gripper_left
+            topic: /popcanbot/arm/gripper_left_position_controller/command
+            type: double
+            min: $(arg gripper_left_lower_lim)
+            default: $(arg gripper_left_lower_lim)
+            max: $(arg gripper_left_upper_lim)
+          gripper_right:
+            name: gripper_right
+            topic: /popcanbot/arm/gripper_right_position_controller/command
+            type: double
+            min: $(arg gripper_right_lower_lim)
+            default: $(arg gripper_right_upper_lim)
+            max: $(arg gripper_right_upper_lim)
+      </rosparam>
+    </group>  <!-- controls -->
 
   <node if="$(arg use_static_tf)"
       pkg="tf" type="static_transform_publisher" name="static_transform_publisher"
