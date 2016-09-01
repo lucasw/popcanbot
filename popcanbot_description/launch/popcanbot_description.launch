@@ -14,7 +14,7 @@
       if="$(arg use_robot_pub)"/>
 
 
-  <node name="popcan_joint_state_publisher" pkg="joint_state_publisher"
+  <node name="popcanbot_joint_state_publisher" pkg="joint_state_publisher"
       type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_joint_gui)"/>
     <!-- the last two are commanded joint states, not encoder derived -->

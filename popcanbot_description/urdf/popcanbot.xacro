@@ -130,85 +130,68 @@
   </transmission>
 
   <!-- gripper -->
-  <xacro:block name="gripper_left" length="0.07"
+  <xacro:macro name="gripper" params="name parent x y z roll pitch yaw ax ay az lower_lim upper_lim">
+  <xacro:block name="${name}" length="0.04"
       width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
       mu="1.0"/>
-  <joint name="gripper_left_joint" type="revolute">
-    <parent link="arm_horizontal"/>
-    <child link="gripper_left"/>
-    <origin xyz="0.25 0.02 -0.1" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="200.0" upper="0.7" lower="-0.1" velocity="0.5"/>
+  <joint name="${name}_joint" type="revolute">
+    <parent link="${parent}"/>
+    <child link="${name}"/>
+    <origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+    <axis xyz="${ax} ${ay} ${az}"/>
+    <limit effort="200.0" upper="${upper_lim}" lower="${lower_lim}" velocity="0.5"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
-  <xacro:block name="gripper_left_mid" length="0.07"
+  <xacro:block name="${name}_mid1" length="0.04"
       width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
       mu="1.0"/>
-  <joint name="gripper_left_mid_joint" type="fixed">
-    <parent link="gripper_left"/>
-    <child link="gripper_left_mid"/>
-    <origin xyz="0.05 0.0 0.0" rpy="0 0 -0.3"/>
+  <joint name="${name}_mid1_joint" type="fixed">
+    <parent link="${name}"/>
+    <child link="${name}_mid1"/>
+    <origin xyz="0.03 0.0 0.0" rpy="0 0 -0.28"/>
   </joint>
-  <xacro:block name="gripper_left_tip" length="0.05"
+  <xacro:block name="${name}_mid2" length="0.04"
       width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
       mu="1.0"/>
-  <joint name="gripper_left_tip_joint" type="fixed">
-    <parent link="gripper_left_mid"/>
-    <child link="gripper_left_tip"/>
-    <origin xyz="0.05 0.0 0.0" rpy="0 0 -0.3"/>
+  <joint name="${name}_mid2_joint" type="fixed">
+    <parent link="${name}_mid1"/>
+    <child link="${name}_mid2"/>
+    <origin xyz="0.03 0.0 0.0" rpy="0 0 -0.28"/>
   </joint>
 
-  <transmission name="gripper_left_rotary_tran">
+  <xacro:block name="${name}_tip" length="0.04"
+      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
+      mu="1.0"/>
+  <joint name="${name}_tip_joint" type="fixed">
+    <parent link="${name}_mid2"/>
+    <child link="${name}_tip"/>
+    <origin xyz="0.03 0.0 0.0" rpy="0 0 -0.28"/>
+  </joint>
+
+  <transmission name="${name}_rotary_tran">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="gripper_left_joint">
+    <joint name="${name}_joint">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="gripper_left_motor">
+    <actuator name="${name}_motor">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+  </xacro:macro>
 
-  <xacro:block name="gripper_right" length="0.07"
-      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
-      mu="1.0"/>
-  <joint name="gripper_right_joint" type="revolute">
-    <parent link="arm_horizontal"/>
-    <child link="gripper_right"/>
-    <origin xyz="0.25 -0.02 -0.1" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="200.0" upper="0.1" lower="-0.5" velocity="0.5"/>
-    <dynamics damping="0.1" friction="0.1"/>
-    <!-- mimic doesn't do anything in gazebo, but should be useful in pure rviz -->
-    <!--mimic joint="gripper_left_joint" multiplier="-1.0"/-->
-  </joint>
-  <xacro:block name="gripper_right_mid" length="0.07"
-      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
-      mu="1.0"/>
-  <joint name="gripper_right_mid_joint" type="fixed">
-    <parent link="gripper_right"/>
-    <child link="gripper_right_mid"/>
-    <origin xyz="0.05 0.0 0.0" rpy="0 0 0.3"/>
-  </joint>
-  <xacro:block name="gripper_right_tip" length="0.05"
-      width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"
-      mu="1.0"/>
-  <joint name="gripper_right_tip_joint" type="fixed">
-    <parent link="gripper_right_mid"/>
-    <child link="gripper_right_tip"/>
-    <origin xyz="0.05 0.0 0.0" rpy="0 0 0.3"/>
-  </joint>
-
-  <transmission name="gripper_right_rotary_tran">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="gripper_right_joint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="gripper_right_motor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
+  <xacro:gripper name="gripper_left"
+      parent="arm_horizontal"
+      x="0.25" y="0.02" z="-0.1"
+      roll="0" pitch="0" yaw="0.4"
+      ax="0" ay="0" az="-1"
+      lower_lim="-0.5" upper_lim="0.0"/>
+  <xacro:gripper name="gripper_right"
+      parent="arm_horizontal"
+      x="0.25" y="-0.02" z="-0.1"
+      roll="${pi}" pitch="0" yaw="-0.4"
+      ax="0" ay="0" az="-1"
+      lower_lim="0.0" upper_lim="5.0"/>
 
   <!-- sensors -->
   <xacro:if value="${use_camera}">
