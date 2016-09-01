@@ -9,32 +9,32 @@
         name: arm_horizontal
         topic: /popcanbot/arm/arm_horizontal_position_controller/command
         type: double
-        min: -1.0
-        max: 1.0
+        min: -0.3
+        max: 0.1
       arm_vertical:
         name: arm_vertical
         topic: /popcanbot/arm/arm_vertical_position_controller/command
         type: double
-        min: -1.0
-        max: 1.0
+        min: -0.2
+        max: 0.4
       arm_rotation:
         name: arm_rotation
         topic: /popcanbot/arm/arm_vertical_rotation_controller/command
         type: double
-        min: -1.0
-        max: 1.0
+        min: -1.7
+        max: 1.7
       gripper_left:
         name: gripper_left
         topic: /popcanbot/arm/gripper_left_position_controller/command
         type: double
-        min: -1.0
-        max: 1.0
+        min: -0.2
+        max: 0.8
       gripper_right:
         name: gripper_right
         topic: /popcanbot/arm/gripper_right_position_controller/command
         type: double
-        min: -1.0
-        max: 1.0
+        min: -0.5
+        max: 0.6
   </rosparam>
   </group>
 
@@ -43,6 +43,9 @@
   </node>
 
   <!-- TODO(lucasw) launch rqt ui.perspective -->
+  <node name="popcanbot_rqt" pkg="rqt_gui" type="rqt_gui"
+      respawn="false" output="screen"
+      args="--perspective-file $(find popcanbot_ui)/config/popcanbot.perspective"/>
 </group>  <!-- popcanbot -->
 
 </launch>

@@ -72,6 +72,7 @@
     <origin xyz="${-car_length/3} 0 ${car_height/4}" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="100.0" upper="1.6" lower="-1.6" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
   <transmission name="arm_vertical_rotary_tran">
@@ -93,7 +94,8 @@
     <child link="arm_vertical_platform"/>
     <origin xyz="0.05 0 0.25" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="20.0" velocity="0.25" lower="-0.14" upper="0.30"/>
+    <limit effort="20.0" velocity="0.25" lower="-0.14" upper="0.35"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
   <transmission name="arm_vertical_rotary_tran">
     <type>transmission_interface/SimpleTransmission</type>
@@ -114,6 +116,7 @@
     <origin xyz="0.1 -0.06 -0.05" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
     <limit effort="20.0" velocity="0.25" lower="-0.22" upper="0.05"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
   <transmission name="arm_vertical_rotary_tran">
     <type>transmission_interface/SimpleTransmission</type>
@@ -134,7 +137,8 @@
     <child link="gripper_left"/>
     <origin xyz="0.25 0.02 -0.1" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="100.0" upper="0.7" lower="-0.1" velocity="0.5"/>
+    <limit effort="200.0" upper="0.7" lower="-0.1" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
   <xacro:block name="gripper_left_mid" length="0.07"
       width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"/>
@@ -169,9 +173,10 @@
     <child link="gripper_right"/>
     <origin xyz="0.25 -0.02 -0.1" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="100.0" upper="0.1" lower="-0.4" velocity="0.5"/>
+    <limit effort="200.0" upper="0.1" lower="-0.5" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
     <!-- mimic doesn't do anything in gazebo, but should be useful in pure rviz -->
-    <mimic joint="gripper_left_joint" multiplier="-1.0"/>
+    <!--mimic joint="gripper_left_joint" multiplier="-1.0"/-->
   </joint>
   <xacro:block name="gripper_right_mid" length="0.07"
       width="0.02" height="0.02" mass="0.05" r="0.1" b="0.1" g="0.6" x="0.03"/>
@@ -204,11 +209,12 @@
   <xacro:block name="camera_mast" length="0.04"
       width="0.02" height="0.03" mass="0.1"/>
   <joint name="camera_mast_joint" type="prismatic">
-    <parent link="base_link"/>
+    <parent link="arm_horizontal"/>
     <child link="camera_mast"/>
-    <origin xyz="0.1 0 0.4" rpy="0 0 0"/>
+    <origin xyz="0.1 0 0.2" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="20.0" velocity="0.25" lower="0.0" upper="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
   <xacro:block name="camera_link" length="0.05"

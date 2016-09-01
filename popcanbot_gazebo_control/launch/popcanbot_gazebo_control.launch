@@ -60,6 +60,8 @@
 
   </group>
 
+  <include file="$(find popcanbot_ui)/launch/ui.launch">
+  </include>
   <include file="$(find popcanbot_gazebo)/launch/popcanbot_world.launch">
     <arg name="use_joy" value="$(arg use_joy)"/>
     <arg name="world_name" value="$(arg world_name)"/>
