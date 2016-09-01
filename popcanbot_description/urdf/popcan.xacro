@@ -9,7 +9,8 @@
   <link name="popcan_base_link"/>
   <xacro:wheel name="popcan"
       radius="${radius}" width="${height}" mass="0.37"
-      r="1.0" g="0.1" b="0.1"/>
+      r="1.0" g="0.1" b="0.1"
+      mu="1.0"/>
   <joint name="bottom_joint" type="fixed">
     <parent link="popcan_base_link"/>
     <child link="popcan"/>
