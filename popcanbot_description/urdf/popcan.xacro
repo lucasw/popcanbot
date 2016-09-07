@@ -3,17 +3,55 @@
 
 <xacro:property name="radius" value="0.027051"/>
 <xacro:property name="height" value="0.122682"/>
+<xacro:property name="mu" value="5.0"/>
 
 <xacro:include filename="$(find popcanbot_description)/urdf/util.xacro"/>
 
+  <!-- Make a slightly conical cylinder to increase ability to hold can -->
   <link name="popcan_base_link"/>
-  <xacro:wheel name="popcan"
-      radius="${radius}" width="${height}" mass="0.37"
-      r="1.0" g="0.1" b="0.1"/>
-  <joint name="bottom_joint" type="fixed">
+  <xacro:wheel name="popcan1"
+      radius="${radius}" width="${height/5.0}" mass="${0.37/5.0}"
+      r="1.0" g="0.1" b="0.1"
+      mu="${mu}"/>
+  <joint name="popcan_joint1" type="fixed">
     <parent link="popcan_base_link"/>
-    <child link="popcan"/>
+    <child link="popcan1"/>
     <origin xyz="0 0 0" rpy="${pi/2.0} 0 0"/>
   </joint>
-
+  <xacro:wheel name="popcan2"
+      radius="${radius + 0.0001}" width="${height/5.0}" mass="${0.37/5.0}"
+      r="1.0" g="0.1" b="0.1"
+      mu="${mu}"/>
+  <joint name="popcan_joint2" type="fixed">
+    <parent link="popcan1"/>
+    <child link="popcan2"/>
+    <origin xyz="0 ${height/5.0} 0" rpy="0 0 0"/>
+  </joint>
+  <xacro:wheel name="popcan3"
+      radius="${radius + 0.0002}" width="${height/5.0}" mass="${0.37/5.0}"
+      r="1.0" g="0.1" b="0.1"
+      mu="${mu}"/>
+  <joint name="popcan_joint3" type="fixed">
+    <parent link="popcan2"/>
+    <child link="popcan3"/>
+    <origin xyz="0 ${height/5.0} 0" rpy="0 0 0"/>
+  </joint>
+  <xacro:wheel name="popcan4"
+      radius="${radius + 0.0003}" width="${height/5.0}" mass="${0.37/5.0}"
+      r="1.0" g="0.1" b="0.1"
+      mu="${mu}"/>
+  <joint name="popcan_joint4" type="fixed">
+    <parent link="popcan3"/>
+    <child link="popcan4"/>
+    <origin xyz="0 ${height/5.0} 0" rpy="0 0 0"/>
+  </joint>
+  <xacro:wheel name="popcan5"
+      radius="${radius + 0.0004}" width="${height/5.0}" mass="${0.37/5.0}"
+      r="1.0" g="0.1" b="0.1"
+      mu="${mu}"/>
+  <joint name="popcan_joint5" type="fixed">
+    <parent link="popcan4"/>
+    <child link="popcan5"/>
+    <origin xyz="0 ${height/5.0} 0" rpy="0 0 0"/>
+  </joint>
 </robot>
