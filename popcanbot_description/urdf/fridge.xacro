@@ -14,8 +14,8 @@
 <xacro:include filename="$(find popcanbot_description)/urdf/util.xacro"/>
 
   <link name="fridge_base_link"/>
-  <xacro:block name="fridge_bottom" length="${length}"
-      width="${width}" height="${wall_thickness}" mass="5.0"
+  <xacro:block name="fridge_bottom" length="${length * 0.98}"
+      width="${width * 0.98}" height="${wall_thickness}" mass="5.0"
       r="0.7" g="0.7" b="0.7"/>
   <joint name="bottom_joint" type="fixed">
     <parent link="fridge_base_link"/>
@@ -50,8 +50,8 @@
     <origin xyz="0 ${-width/2} ${height/2}" rpy="0 0 0"/>
   </joint>
 
-  <xacro:block name="fridge_shelf" length="${length}"
-      width="${width}" height="${wall_thickness}" mass="5.0"
+  <xacro:block name="fridge_shelf" length="${length * 0.98}"
+      width="${width * 0.98}" height="${wall_thickness * 0.9}" mass="5.0"
       r="0.7" g="0.7" b="0.7"/>
   <joint name="shelf_joint" type="fixed">
     <parent link="fridge_base_link"/>
@@ -59,8 +59,8 @@
     <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
   </joint>
 
-  <xacro:block name="fridge_top" length="${length}"
-      width="${width}" height="${wall_thickness}" mass="5.0"
+  <xacro:block name="fridge_top" length="${length * 0.98}"
+      width="${width * 0.98}" height="${wall_thickness}" mass="5.0"
       r="0.7" g="0.7" b="0.7"/>
   <joint name="top_joint" type="fixed">
     <parent link="fridge_base_link"/>
