@@ -4,6 +4,10 @@ ros robot with two-wheels plus caster steering and a gripper on an arm for compe
 
 http://www.robothon.org/robothon/popcan.php
 
+This shows the latest with the simulation https://www.youtube.com/watch?v=9LyC6aFFdv4
+
+The sim grippers aren't great at holding onto the can.
+
 # Dimensions
 
 "The US standard can is 4.83 inches (0.1227 m) high, 2.13 inches in diameter at the lid, and 2.60 inches (0.0660 m) in diameter at the widest point of the body."
@@ -27,7 +31,13 @@ If using kinetic, get the kinetic branch:
 
 # gazebo simulation
 
+In ros kinetic:
+
     roslaunch popcanbot_gazebo_control popcanbot_gazebo_control.launch
+
+Pre gazebo 7 (ros jade and perhaps earlier, haven't tested in anything earlier than jade):
+
+    roslaunch popcanbot_gazebo_control popcanbot_gazebo_control.launch world_name:=worlds/empty.world
 
 If it is the first time gazebo has launched, this may take a long time before you see
 
