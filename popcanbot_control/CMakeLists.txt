@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(popcanbot_control)
 
 ## Find catkin macros and libraries
@@ -6,12 +6,14 @@ project(popcanbot_control)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  roslint
   rospy
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+set(ROSLINT_PYTHON_OPTS "--ignore=W503" "1>&2")
+roslint_python()
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -101,7 +103,9 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES popcanbot_control
-#  CATKIN_DEPENDS roscpp rospy
+  CATKIN_DEPENDS
+  roscpp
+  rospy
 #  DEPENDS system_lib
 )
 

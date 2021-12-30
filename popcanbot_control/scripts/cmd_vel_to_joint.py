@@ -6,10 +6,10 @@
 # and angular components into a joint state for the wheels.
 
 import math
+
 import rospy
 import tf2_py as tf2
 import tf2_ros
-
 from geometry_msgs.msg import PointStamped, TransformStamped, Twist
 from sensor_msgs.msg import JointState
 from tf import transformations
@@ -128,8 +128,8 @@ class CmdVelToJoint():
         # update odometry
         self.angle += angular_z * self.period
         distance = linear_x * self.period
-	# TODO(lucasw) actually compute the arc traveled rather than assuming the travel
-	# was a straight line.
+        # TODO(lucasw) actually compute the arc traveled rather than assuming the travel
+        # was a straight line.
         self.ts.transform.translation.x += distance * math.cos(-self.angle)
         self.ts.transform.translation.y -= distance * math.sin(-self.angle)
 
@@ -139,7 +139,8 @@ class CmdVelToJoint():
         self.ts.transform.rotation.z = quat[2]
         self.ts.transform.rotation.w = quat[3]
 
-	self.br.sendTransform(self.ts)
+        self.br.sendTransform(self.ts)
+
 
 if __name__ == '__main__':
     rospy.init_node("cmd_vel_to_joint")

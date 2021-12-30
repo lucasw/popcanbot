@@ -2,7 +2,7 @@
 <package>
   <name>popcanbot_gazebo</name>
   <version>0.0.0</version>
-  <description>The popcanbot_gazebo package</description>
+  <description>gazebo files for popcanbot</description>
 
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="wsacul@gmail.com">Lucas Walter</maintainer>
@@ -41,7 +41,7 @@
 
   <run_depend>gazebo_plugins</run_depend>
   <run_depend>gazebo_ros</run_depend>
-  <run_depend>gazebo_control</run_depend>
+  <run_depend>popcanbot_control</run_depend>
   <run_depend>popcanbot_description</run_depend>
   <run_depend>xacro</run_depend>
 

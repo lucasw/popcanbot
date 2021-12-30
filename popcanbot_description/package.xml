@@ -2,7 +2,7 @@
 <package>
   <name>popcanbot_description</name>
   <version>0.0.0</version>
-  <description>The popcanbot_description package</description>
+  <description>urdf/xacro files for the popcanbot</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -42,8 +42,10 @@
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>joint_state_publisher</run_depend>
   <run_depend>robot_state_publisher</run_depend>
+  <run_depend>bullet_server</run_depend>
   <run_depend>rviz</run_depend>
-
+  <run_depend>xacro</run_depend>
+  <run_depend>tf</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

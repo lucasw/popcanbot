@@ -2,7 +2,7 @@
 <package>
   <name>popcanbot_ui</name>
   <version>0.0.0</version>
-  <description>The popcanbot_ui package</description>
+  <description>The popcanbot user interface</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -41,6 +41,7 @@
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>dynamic_reconfigure_tools</run_depend>
+  <run_depend>rqt_gui</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
